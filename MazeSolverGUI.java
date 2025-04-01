@@ -1,0 +1,57 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
+
+public class MazeSolverGUI extends JPanel {
+    private static final int CELL_SIZE = 30;
+    private int[][] maze;
+    private List<MazeSolver.Point> path;
+    private int step = 0;
+
+    public MazeSolverGUI(int[][] maze, List<MazeSolver.Point> path) {
+        this.maze = maze;
+        this.path = path;
+        Timer timer = new Timer(100, e -> {
+            if (step < path.size()) {
+                step++;
+                repaint();
+            } else {
+                ((Timer) e.getSource()).stop();
+            }
+        });
+        timer.start();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                if (maze[i][j] == 1) {
+                    g.setColor(Color.BLACK);
+                } else {
+                    g.setColor(Color.GRAY);
+                }
+                g.fillRect(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            }
+        }
+        for (int i = 0; i < step; i++) {
+            MazeSolver.Point p = path.get(i);
+            g.setColor(Color.PINK);
+            g.fillRect(p.col * CELL_SIZE, p.row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        }
+    }
+
+    public static void main(String[] args) {
+        int rows = 11, cols = 11;
+        int[][] maze = MazeSolver.generateMaze(rows, cols);
+        List<MazeSolver.Point> path = MazeSolver.bfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
+        
+        JFrame frame = new JFrame("Maze Solver");
+        MazeSolverGUI panel = new MazeSolverGUI(maze, path);
+        frame.add(panel);
+        frame.setSize(cols * CELL_SIZE + 20, rows * CELL_SIZE + 40);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
