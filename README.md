@@ -11,5 +11,5 @@ To run project:
 java MazeSolverGUI
 ```
 
-Sample Output: 
+Sample Output: </br>
 ![alt text](https://github.com/natt-n/Maze-Solver/blob/main/sample%20output.png "Sample Output")
