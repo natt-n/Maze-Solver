@@ -55,7 +55,7 @@ public class MazeSolverGUI extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        //time delay for the first maze
+        /*
         javax.swing.Timer timer = new javax.swing.Timer(2000, e -> {
             JFrame frame2 = new JFrame("Maze Solver");
             MazeSolverGUI panel2 = new MazeSolverGUI(maze, BFSpath);
@@ -67,5 +67,7 @@ public class MazeSolverGUI extends JPanel {
         
         timer.setRepeats(false);
         timer.start();
+        */
+        // Uncomment the above code to show BFS path after a delay
     }
 }
