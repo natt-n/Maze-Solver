@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.List;
 
 public class MazeSolverGUI extends JPanel {
-    private static final int CELL_SIZE = 30;
+    private static final int CELL_SIZE = 10;
     private int[][] maze;
     private List<MazeSolver.Point> path;
     private int step = 0;
@@ -43,23 +43,9 @@ public class MazeSolverGUI extends JPanel {
     }
 
     public static void main(String[] args) {
-        int rows = 11, cols = 11;
-        int[][] maze1 = MazeSolver.generateMaze(rows, cols);
+        int rows = 25, cols = 25;
+        int[][] maze = MazeSolver.generateMaze(rows, cols);
 
-        int[][] maze = {
-            {0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0},
-            {0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0},
-            {0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0},
-            {1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0},
-            {1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0},
-            {0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0},
-            {0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0},
-            {1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0},
-            {0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0},
-            {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0}
-        };
-        
         List<MazeSolver.Point> DFSpath = MazeSolver.dfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
         List<MazeSolver.Point> BFSpath= MazeSolver.bfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
         
