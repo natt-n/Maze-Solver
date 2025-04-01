@@ -12,3 +12,4 @@ java MazeSolverGUI
 ```
 
 Sample Output: 
+![alt text](https://github.com/natt-n/Maze-Solver/blob/main/sample%20output.png "Sample Output")
