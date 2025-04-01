@@ -44,7 +44,22 @@ public class MazeSolverGUI extends JPanel {
 
     public static void main(String[] args) {
         int rows = 11, cols = 11;
-        int[][] maze = MazeSolver.generateMaze(rows, cols);
+        int[][] maze1 = MazeSolver.generateMaze(rows, cols);
+
+        int[][] maze = {
+            {0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+            {0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0},
+            {0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0},
+            {1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0},
+            {0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0},
+            {1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0},
+            {0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0},
+            {0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+            {1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0},
+            {0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0},
+            {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0}
+        };
+        
         List<MazeSolver.Point> DFSpath = MazeSolver.dfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
         List<MazeSolver.Point> BFSpath= MazeSolver.bfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
         
@@ -55,7 +70,7 @@ public class MazeSolverGUI extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        /*
+        
         javax.swing.Timer timer = new javax.swing.Timer(2000, e -> {
             JFrame frame2 = new JFrame("Maze Solver");
             MazeSolverGUI panel2 = new MazeSolverGUI(maze, BFSpath);
@@ -67,7 +82,7 @@ public class MazeSolverGUI extends JPanel {
         
         timer.setRepeats(false);
         timer.start();
-        */
+        
         // Uncomment the above code to show BFS path after a delay
     }
 }
