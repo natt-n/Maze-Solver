@@ -159,8 +159,6 @@ public class MazeSolver {
         return Collections.emptyList();
     }
     
-    
-
     private static boolean isValidMove(int[][] maze, int row, int col) {
         return row >= 0 && row < maze.length && col >= 0 && col < maze[0].length && maze[row][col] == 0;
     }
