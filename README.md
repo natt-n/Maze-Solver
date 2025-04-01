@@ -10,3 +10,5 @@ To run project:
 ```
 java MazeSolverGUI
 ```
+
+Sample Output: 

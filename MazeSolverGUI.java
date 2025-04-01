@@ -45,13 +45,27 @@ public class MazeSolverGUI extends JPanel {
     public static void main(String[] args) {
         int rows = 11, cols = 11;
         int[][] maze = MazeSolver.generateMaze(rows, cols);
-        List<MazeSolver.Point> path = MazeSolver.bfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
+        List<MazeSolver.Point> DFSpath = MazeSolver.dfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
+        List<MazeSolver.Point> BFSpath= MazeSolver.bfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
         
         JFrame frame = new JFrame("Maze Solver");
-        MazeSolverGUI panel = new MazeSolverGUI(maze, path);
+        MazeSolverGUI panel = new MazeSolverGUI(maze, DFSpath);
         frame.add(panel);
         frame.setSize(cols * CELL_SIZE + 20, rows * CELL_SIZE + 40);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        //time delay for the first maze
+        javax.swing.Timer timer = new javax.swing.Timer(2000, e -> {
+            JFrame frame2 = new JFrame("Maze Solver");
+            MazeSolverGUI panel2 = new MazeSolverGUI(maze, BFSpath);
+            frame2.add(panel2);
+            frame2.setSize(cols * CELL_SIZE + 20, rows * CELL_SIZE + 40);
+            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame2.setVisible(true);
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
     }
 }

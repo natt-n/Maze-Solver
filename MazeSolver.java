@@ -104,23 +104,24 @@ public class MazeSolver {
     private static boolean isInBounds(int row, int col, int rows, int cols) {
         return row >= 0 && row < rows && col >= 0 && col < cols;
     }
-     
+
     public static List<Point> bfs(int[][] maze, Point start, Point end) {
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         Map<Point, List<Point>> graph = buildGraph(maze);
         Queue<Point> queue = new LinkedList<>();
         Set<Point> visited = new HashSet<>();
         queue.offer(start);
         visited.add(start);
-
+    
         while (!queue.isEmpty()) {
             Point current = queue.poll();
             if (current.equals(end)) {
-                long endTime = System.currentTimeMillis();
-                System.out.println("Maze solving time: " + (endTime - startTime) + " ms");
+                long endTime = System.nanoTime();
+                double elapsedTime = (endTime - startTime) / 1_000_000.0; // Convert to milliseconds
+                System.out.printf("BFS Maze solving time: %.6f ms%n", elapsedTime); // 6 decimal places
                 return buildPath(current);
             }
-
+    
             for (Point neighbor : graph.getOrDefault(current, Collections.emptyList())) {
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
@@ -130,6 +131,35 @@ public class MazeSolver {
         }
         return Collections.emptyList();
     }
+    
+    public static List<Point> dfs(int[][] maze, Point start, Point end) {
+        long startTime = System.nanoTime();
+        Map<Point, List<Point>> graph = buildGraph(maze);
+        Stack<Point> stack = new Stack<>();
+        Set<Point> visited = new HashSet<>();
+        stack.push(start);
+        visited.add(start);
+    
+        while (!stack.isEmpty()) {
+            Point current = stack.pop();
+            if (current.equals(end)) {
+                long endTime = System.nanoTime();
+                double elapsedTime = (endTime - startTime) / 1_000_000.0; // Convert to milliseconds
+                System.out.printf("DFS Maze solving time: %.6f ms%n", elapsedTime); // 6 decimal places
+                return buildPath(current);
+            }
+    
+            for (Point neighbor : graph.getOrDefault(current, Collections.emptyList())) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    stack.push(new Point(neighbor.row, neighbor.col, current));
+                }
+            }
+        }
+        return Collections.emptyList();
+    }
+    
+    
 
     private static boolean isValidMove(int[][] maze, int row, int col) {
         return row >= 0 && row < maze.length && col >= 0 && col < maze[0].length && maze[row][col] == 0;
