@@ -3,10 +3,10 @@ Final Project Submission for Data Structures
 
 To compile project: 
 ```
-javac MazeSolverFinal.java
+javac MazeSolverGUI.java
 ```
 
 To run project: 
 ```
-java MazeSolverFinal
+java MazeSolverGUI
 ```
