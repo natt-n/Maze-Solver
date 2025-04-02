@@ -67,8 +67,6 @@ public class MazeSolverGUI extends JPanel {
         });
         
         timer.setRepeats(false);
-        timer.start();
-        
-        // Uncomment the above code to show BFS path after a delay
+        timer.start();        
     }
 }
