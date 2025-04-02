@@ -29,32 +29,6 @@ public class MazeSolver {
         }
     }
 
-    // Build the graph (adjacency list) representation of the maze
-    private static Map<Point, List<Point>> buildGraph(int[][] maze) {
-        Map<Point, List<Point>> graph = new HashMap<>();
-        int rows = maze.length, cols = maze[0].length;
-        int[][] directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
-
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (maze[row][col] == 0) {  // Valid cell
-                    Point node = new Point(row, col, null);
-                    List<Point> neighbors = new ArrayList<>();
-
-                    for (int[] dir : directions) {
-                        int newRow = row + dir[0];
-                        int newCol = col + dir[1];
-                        if (isValidMove(maze, newRow, newCol)) {
-                            neighbors.add(new Point(newRow, newCol, null));  // Add valid neighbor
-                        }
-                    }
-                    graph.put(node, neighbors);
-                }
-            }
-        }
-        return graph;
-    }
-    
     public static int[][] generateMaze(int rows, int cols) {
         int[][] maze = new int[rows][cols];
         for (int[] row : maze) Arrays.fill(row, 1); // fill with walls
@@ -134,15 +108,36 @@ public class MazeSolver {
         }
     }
 
-    private static boolean isInBounds(int row, int col, int rows, int cols) {
-        return row >= 0 && row < rows && col >= 0 && col < cols;
-    }
-
     private static boolean isValidMove(int[][] maze, int row, int col) {
         return row >= 0 && row < maze.length && col >= 0 && col < maze[0].length && maze[row][col] == 0;
     }
 
-    // BFS with graph representation
+    // Build the graph (adjacency list) representation of the maze
+    private static Map<Point, List<Point>> buildGraph(int[][] maze) {
+        Map<Point, List<Point>> graph = new HashMap<>();
+        int rows = maze.length, cols = maze[0].length;
+        int[][] directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (maze[row][col] == 0) {  // Valid cell
+                    Point node = new Point(row, col, null);
+                    List<Point> neighbors = new ArrayList<>();
+
+                    for (int[] dir : directions) {
+                        int newRow = row + dir[0];
+                        int newCol = col + dir[1];
+                        if (isValidMove(maze, newRow, newCol)) {
+                            neighbors.add(new Point(newRow, newCol, null));  // Add valid neighbor
+                        }
+                    }
+                    graph.put(node, neighbors);
+                }
+            }
+        }
+        return graph;
+    }
+
     public static List<Point> bfs(int[][] maze, Point start, Point end) {
         long startTime = System.nanoTime();
         Map<Point, List<Point>> graph = buildGraph(maze);
@@ -173,7 +168,6 @@ public class MazeSolver {
         return Collections.emptyList();
     }
     
-    // DFS with graph representation
     public static List<Point> dfs(int[][] maze, Point start, Point end) {
         long startTime = System.nanoTime();
         Map<Point, List<Point>> graph = buildGraph(maze);

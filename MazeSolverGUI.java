@@ -43,7 +43,7 @@ public class MazeSolverGUI extends JPanel {
     }
 
     public static void main(String[] args) {
-        int rows = 25, cols = 25;
+        int rows = 11, cols = 11;
         int[][] maze = MazeSolver.generateMaze(rows, cols);
 
         List<MazeSolver.Point> DFSpath = MazeSolver.dfs(maze, new MazeSolver.Point(0, 0, null), new MazeSolver.Point(rows - 1, cols - 1, null));
